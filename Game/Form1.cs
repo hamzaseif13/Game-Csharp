@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//" new commit test
 namespace Game
 {
     public partial class Form1 : Form
@@ -82,7 +82,8 @@ namespace Game
                 current = bomb;
             }
             Pic = new PictureBox()
-            {
+            {   
+                
                 Size = new Size(75, 75),
                 Location = new Point(150 * rand.Next(0, 7), 0),
                 ImageLocation = @"C:\Users\hamza\Desktop\project-assest\" + current,
