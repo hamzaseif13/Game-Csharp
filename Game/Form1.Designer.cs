@@ -30,21 +30,11 @@ namespace Game
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.StartBtn = new System.Windows.Forms.Button();
             this.StartTimer = new System.Windows.Forms.Timer(this.components);
             this.ScoreLabel = new System.Windows.Forms.Label();
             this.TotalLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // StartBtn
-            // 
-            this.StartBtn.Location = new System.Drawing.Point(759, 38);
-            this.StartBtn.Name = "StartBtn";
-            this.StartBtn.Size = new System.Drawing.Size(184, 34);
-            this.StartBtn.TabIndex = 1;
-            this.StartBtn.Text = "Start game";
-            this.StartBtn.UseVisualStyleBackColor = true;
-            this.StartBtn.Click += new System.EventHandler(this.StartBtn_Click);
             // 
             // StartTimer
             // 
@@ -75,30 +65,44 @@ namespace Game
             this.TotalLabel.TabIndex = 3;
             this.TotalLabel.Text = "label1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(755, 46);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.button1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(1034, 661);
+            this.BackColor = System.Drawing.Color.Sienna;
+            this.ClientSize = new System.Drawing.Size(1034, 660);
             this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.ScoreLabel);
-            this.Controls.Add(this.StartBtn);
-            this.MaximumSize = new System.Drawing.Size(1050, 700);
-            this.MinimumSize = new System.Drawing.Size(1050, 700);
+            this.Controls.Add(this.button1);
+            this.DoubleBuffered = true;
+            this.MaximumSize = new System.Drawing.Size(1050, 699);
+            this.MinimumSize = new System.Drawing.Size(1050, 699);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button StartBtn;
         private System.Windows.Forms.Timer StartTimer;
         private System.Windows.Forms.Label ScoreLabel;
         private System.Windows.Forms.Label TotalLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

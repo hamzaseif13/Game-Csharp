@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//" new commit test
+//new commit test
 namespace Game
 {
     public partial class Form1 : Form
@@ -15,16 +15,27 @@ namespace Game
         int Score = 0;
         int Ticks = 0;
         int Total = 0;
+        bool left = false;
+        bool right = false;
+        bool up = false;
+        bool down= false;
+
+        Player Hamza;
         List<Projectile> Projectiles;
         public Form1()
         {
             InitializeComponent();
+         
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Projectiles = new List<Projectile>();
-
+            Hamza = new Player();
+            this.Controls.Add(Hamza.Pic);
+            this.Select();
+            
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -35,12 +46,13 @@ namespace Game
 
         private void StartTimer_Tick(object sender, EventArgs e)
         {
-
+            Hamza.move(left,right,up,down);
             if (Ticks % 75 == 0)
             {
                 Projectile drop = new Projectile(true);
                 Projectiles.Add(drop);
                 this.Controls.Add(drop.Pic);
+     
                 Total++;
                 TotalLabel.Text = Total.ToString();
             }
@@ -59,10 +71,70 @@ namespace Game
             Ticks++;
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
+            MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Left) left = true;
+            if (e.KeyCode == Keys.Right) right = true;
+            if (e.KeyCode == Keys.Up) up = true;
+            if (e.KeyCode == Keys.Down) down= true;
+
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left) left = false;
+            if (e.KeyCode == Keys.Right) right = false;
+            if (e.KeyCode == Keys.Up) up = false;
+            if (e.KeyCode == Keys.Down) down = false;
+            
+        }
+
+       
+
+       
+
+        private void StartBtn_KeyDown(object sender, KeyEventArgs e)
+        {
+          
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StartTimer.Enabled = true;
+        }
+    }
+    class Player
+    {
+        public PictureBox Pic;
+        public  Player()
+        {
+            
+            Pic = new PictureBox()
+            {
+               
+                Size = new Size(100, 100),
+                Location = new Point(470,500),
+                ImageLocation = @"C:\Users\hamza\Desktop\project-assest\mouth.png" ,
+                Name = "hamza",
+                SizeMode = PictureBoxSizeMode.StretchImage,
+               
+            };
+        }
+        public void move(bool left,bool right,bool up,bool down)
+        {
+            if (left) this.Pic.Left -= 4;
+            if (right) this.Pic.Left += 4;
+            if (up) this.Pic.Top -= 4;
+            if (down) this.Pic.Top += 4;
+
+        }
     }
     class Projectile
     {
+        //sync test
         public PictureBox Pic;
         public bool IsFruit;
         public Projectile(bool IsFruit)
@@ -82,21 +154,19 @@ namespace Game
                 current = bomb;
             }
             Pic = new PictureBox()
-            {   
+            {
                 
                 Size = new Size(75, 75),
                 Location = new Point(150 * rand.Next(0, 7), 0),
                 ImageLocation = @"C:\Users\hamza\Desktop\project-assest\" + current,
                 Name = "hamza",
                 SizeMode = PictureBoxSizeMode.StretchImage
-            };
 
+            };
         }
         public void move()
         {
             Pic.Top += 2;
         }
-
     }
-
 }
