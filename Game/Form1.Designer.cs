@@ -73,6 +73,7 @@ namespace Game
             this.button1.TabIndex = 4;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.button1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             // 
@@ -80,14 +81,15 @@ namespace Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Sienna;
-            this.ClientSize = new System.Drawing.Size(1034, 660);
+            this.BackColor = System.Drawing.Color.LightCoral;
+            this.ClientSize = new System.Drawing.Size(1034, 761);
             this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
-            this.MaximumSize = new System.Drawing.Size(1050, 699);
-            this.MinimumSize = new System.Drawing.Size(1050, 699);
+            this.MaximumSize = new System.Drawing.Size(1050, 800);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1050, 800);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
