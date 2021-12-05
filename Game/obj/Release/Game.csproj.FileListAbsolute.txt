@@ -1,0 +1,11 @@
+C:\Users\hamza\source\repos\Game\Game\bin\Release\Resources\banana1.png
+C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.exe.config
+C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.exe
+C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.pdb
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.AssemblyReference.cache
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.Form1.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.Properties.Resources.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.GenerateResource.cache
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.exe
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.pdb

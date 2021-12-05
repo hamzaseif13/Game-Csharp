@@ -16,7 +16,10 @@ namespace Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            MainMenu startForm = new MainMenu();
+            Application.Run(startForm);
+            
+            Application.Run(new GameForm());
         }
     }
 }
