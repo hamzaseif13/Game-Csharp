@@ -38,3 +38,4 @@ C:\Users\hamza\source\repos\Game\Game\bin\Debug\System.Runtime.CompilerServices.
 C:\Users\hamza\source\repos\Game\Game\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.MainMenu.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.GameForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.AddEditPlayer.resources

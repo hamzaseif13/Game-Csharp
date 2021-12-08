@@ -37,12 +37,16 @@ namespace Game
             this.NewPlayer = new System.Windows.Forms.Button();
             this.ChoosePlayer = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.RightPanel = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // StartGame
             // 
             this.StartGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartGame.Location = new System.Drawing.Point(58, 78);
+            this.StartGame.Location = new System.Drawing.Point(33, 70);
             this.StartGame.MaximumSize = new System.Drawing.Size(242, 44);
             this.StartGame.MinimumSize = new System.Drawing.Size(242, 44);
             this.StartGame.Name = "StartGame";
@@ -55,7 +59,7 @@ namespace Game
             // Exit
             // 
             this.Exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exit.Location = new System.Drawing.Point(58, 499);
+            this.Exit.Location = new System.Drawing.Point(33, 440);
             this.Exit.MaximumSize = new System.Drawing.Size(242, 44);
             this.Exit.MinimumSize = new System.Drawing.Size(242, 44);
             this.Exit.Name = "Exit";
@@ -68,7 +72,7 @@ namespace Game
             // History
             // 
             this.History.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.History.Location = new System.Drawing.Point(58, 335);
+            this.History.Location = new System.Drawing.Point(33, 314);
             this.History.MaximumSize = new System.Drawing.Size(242, 44);
             this.History.MinimumSize = new System.Drawing.Size(242, 44);
             this.History.Name = "History";
@@ -76,11 +80,12 @@ namespace Game
             this.History.TabIndex = 4;
             this.History.Text = "History";
             this.History.UseVisualStyleBackColor = true;
+            this.History.Click += new System.EventHandler(this.History_Click);
             // 
             // Statistics
             // 
             this.Statistics.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Statistics.Location = new System.Drawing.Point(58, 270);
+            this.Statistics.Location = new System.Drawing.Point(33, 221);
             this.Statistics.MaximumSize = new System.Drawing.Size(242, 44);
             this.Statistics.MinimumSize = new System.Drawing.Size(242, 44);
             this.Statistics.Name = "Statistics";
@@ -92,7 +97,7 @@ namespace Game
             // Profile
             // 
             this.Profile.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Profile.Location = new System.Drawing.Point(58, 205);
+            this.Profile.Location = new System.Drawing.Point(33, 171);
             this.Profile.MaximumSize = new System.Drawing.Size(242, 44);
             this.Profile.MinimumSize = new System.Drawing.Size(242, 44);
             this.Profile.Name = "Profile";
@@ -104,7 +109,7 @@ namespace Game
             // NewPlayer
             // 
             this.NewPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewPlayer.Location = new System.Drawing.Point(58, 140);
+            this.NewPlayer.Location = new System.Drawing.Point(33, 120);
             this.NewPlayer.MaximumSize = new System.Drawing.Size(242, 44);
             this.NewPlayer.MinimumSize = new System.Drawing.Size(242, 44);
             this.NewPlayer.Name = "NewPlayer";
@@ -119,42 +124,64 @@ namespace Game
             this.ChoosePlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ChoosePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChoosePlayer.FormattingEnabled = true;
-            this.ChoosePlayer.Location = new System.Drawing.Point(564, 225);
+            this.ChoosePlayer.Location = new System.Drawing.Point(320, 120);
             this.ChoosePlayer.Name = "ChoosePlayer";
             this.ChoosePlayer.Size = new System.Drawing.Size(297, 50);
             this.ChoosePlayer.TabIndex = 8;
+            this.ChoosePlayer.SelectedIndexChanged += new System.EventHandler(this.ChoosePlayer_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(554, 151);
+            this.label1.Location = new System.Drawing.Point(311, 58);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(306, 55);
             this.label1.TabIndex = 9;
             this.label1.Text = "Select Player";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.Statistics);
+            this.panel1.Controls.Add(this.History);
+            this.panel1.Controls.Add(this.Profile);
+            this.panel1.Controls.Add(this.Exit);
+            this.panel1.Controls.Add(this.NewPlayer);
+            this.panel1.Controls.Add(this.StartGame);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(278, 590);
+            this.panel1.TabIndex = 10;
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.Controls.Add(this.ChoosePlayer);
+            this.RightPanel.Controls.Add(this.label1);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(280, 0);
+            this.RightPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(854, 590);
+            this.RightPanel.TabIndex = 11;
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(165)))), ((int)(((byte)(165)))));
-            this.ClientSize = new System.Drawing.Size(934, 591);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.ChoosePlayer);
-            this.Controls.Add(this.NewPlayer);
-            this.Controls.Add(this.Profile);
-            this.Controls.Add(this.Statistics);
-            this.Controls.Add(this.History);
-            this.Controls.Add(this.Exit);
-            this.Controls.Add(this.StartGame);
-            this.MaximumSize = new System.Drawing.Size(950, 630);
-            this.MinimumSize = new System.Drawing.Size(950, 630);
+            this.ClientSize = new System.Drawing.Size(1134, 590);
+            this.Controls.Add(this.RightPanel);
+            this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(1150, 629);
+            this.MinimumSize = new System.Drawing.Size(1150, 629);
             this.Name = "MainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
+            this.panel1.ResumeLayout(false);
+            this.RightPanel.ResumeLayout(false);
+            this.RightPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -167,5 +194,7 @@ namespace Game
         private System.Windows.Forms.Button NewPlayer;
         private System.Windows.Forms.ComboBox ChoosePlayer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel RightPanel;
     }
 }
