@@ -10,6 +10,7 @@ using System.Windows.Forms;
 //new commit test
 namespace Game
 {
+    
     public partial class GameForm : Form
     {
         int Score = 0;
@@ -21,9 +22,9 @@ namespace Game
         bool down = false;
         int seconds = 0;
         int minutes = 0;
-        string curr;
         Player Hamza;
         List<Projectile> Projectiles;
+        private PlayerObj RealTimePlayer;
         public GameForm()
         {
            
@@ -37,8 +38,14 @@ namespace Game
             Projectiles = new List<Projectile>();
             Hamza = new Player();
             this.Controls.Add(Hamza.Pic);
-            PlayerLabel.Text += DataTracker.currentPlayer;
-           
+            RealTimePlayer = DataTracker.currentPlayer;
+            PlayerLabel.Text += RealTimePlayer.Name;
+            if(RealTimePlayer.Color=="Blue")this.BackColor = Color.FromArgb(52, 149, 235);
+            else if(RealTimePlayer.Color=="Purple") this.BackColor = Color.FromArgb(111, 66, 184);
+            else if (RealTimePlayer.Color == "Green") this.BackColor = Color.FromArgb(41, 196, 85);
+
+
+
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -58,7 +65,7 @@ namespace Game
                 Projectiles.Add(drop);
                 this.Controls.Add(drop.Pic);
                 Total=isFruit?Total+1:Total;
-                TotalLabel.Text = Total.ToString();
+                TotalLabel.Text = "total fruits "+Total.ToString();
             }
             for (int j = 0; j < Projectiles.Count; j++)
             {
@@ -76,7 +83,7 @@ namespace Game
                 if (Projectiles[j].Pic.Top == this.Height)
                 {
                     if (Projectiles[j].IsFruit) Score -= 10;
-                    ScoreLabel.Text = Score.ToString();
+                    ScoreLabel.Text = "score:"+Score.ToString();
                     Projectiles[j].Pic.Visible = false;
                     Projectiles.RemoveAt(j);
                     j--;
@@ -122,8 +129,7 @@ namespace Game
         {
             StartTimer.Enabled = true;
             ClockTimer.Enabled = true;
-            //button1.Visible = false;
-            button1.Enabled = false;
+          
            
         }
 
@@ -147,6 +153,10 @@ namespace Game
 
             TimeLabel.Text = $"Time {mnt} : {sc}";
         }
+
+       
+
+       
     }
     class Player
     {
@@ -159,7 +169,8 @@ namespace Game
                 Location = new Point(470, 500),
                 ImageLocation = @"C:\Users\hamza\Desktop\project-assest\mouth.png",
                 Name = "hamza",
-                SizeMode = PictureBoxSizeMode.StretchImage,               
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
             };
         }
         public void move(bool left, bool right, bool up, bool down)
@@ -178,11 +189,10 @@ namespace Game
         public Projectile(bool IsFruit)
         {
             this.IsFruit = IsFruit;
-            string current;
-            string bomb = "bomb.png";
+            string current;            
             string[] imgs = new string[] { "banana.png", "apple.png", "strawberry.png" };
             Random rand = new Random();
-            current = this.IsFruit ? current = imgs[rand.Next(0, 3)] : current = bomb;
+            current = this.IsFruit ? current = imgs[rand.Next(0, 3)] : current = "bomb.png";
             Pic = new PictureBox()
             {
                 Size = new Size(100, 100),

@@ -16,9 +16,8 @@ namespace Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new AddEditPlayer());
             MainMenu startForm = new MainMenu();
-            DataTracker.startF= startForm;
+            DataTracker.MainForm= startForm;
             Application.Run(startForm);
             
             

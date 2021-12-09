@@ -44,6 +44,7 @@ namespace Game
             this.Male = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.Error = new System.Windows.Forms.Label();
+            this.CloseBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Age)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -214,12 +215,24 @@ namespace Game
             this.Error.Text = "Name Feild is Empty Please enter a valid name";
             this.Error.Visible = false;
             // 
+            // CloseBtn
+            // 
+            this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseBtn.Location = new System.Drawing.Point(503, 452);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(144, 52);
+            this.CloseBtn.TabIndex = 17;
+            this.CloseBtn.Text = "Close";
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
             // AddEditPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(838, 551);
+            this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.Error);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AddEditLabel);
@@ -261,5 +274,6 @@ namespace Game
         private System.Windows.Forms.RadioButton Male;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Error;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }
