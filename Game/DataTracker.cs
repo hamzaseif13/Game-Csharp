@@ -20,9 +20,7 @@ namespace Game
             PlayerObj lol = new PlayerObj(name, age, gender, color);
             Players.Add(lol);
             
-        }
-        
-       
+        }       
     }
     public class PlayerObj
     {
@@ -50,10 +48,7 @@ namespace Game
                 {
                     Swap(DataTracker.Players, j, DataTracker.Players.Count - 1);
                 }
-            }
-            
-           
-            
+            }           
         }
         public static void Swap<T>(IList<T> list, int indexA, int indexB)
         {

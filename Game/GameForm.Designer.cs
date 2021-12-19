@@ -32,12 +32,13 @@ namespace Game
             this.components = new System.ComponentModel.Container();
             this.StartTimer = new System.Windows.Forms.Timer(this.components);
             this.ScoreLabel = new System.Windows.Forms.Label();
-            this.TotalLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.StartBtn = new System.Windows.Forms.Button();
             this.TimeLabel = new System.Windows.Forms.Label();
             this.ClockTimer = new System.Windows.Forms.Timer(this.components);
             this.PlayerLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LevelLable = new System.Windows.Forms.Label();
+            this.MainMenuBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,46 +51,37 @@ namespace Game
             // 
             this.ScoreLabel.AutoSize = true;
             this.ScoreLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScoreLabel.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScoreLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ScoreLabel.Location = new System.Drawing.Point(12, 43);
+            this.ScoreLabel.Location = new System.Drawing.Point(24, 27);
             this.ScoreLabel.Name = "ScoreLabel";
-            this.ScoreLabel.Size = new System.Drawing.Size(100, 31);
+            this.ScoreLabel.Size = new System.Drawing.Size(127, 39);
             this.ScoreLabel.TabIndex = 2;
             this.ScoreLabel.Text = "Score :";
             // 
-            // TotalLabel
+            // StartBtn
             // 
-            this.TotalLabel.AutoSize = true;
-            this.TotalLabel.BackColor = System.Drawing.Color.Transparent;
-            this.TotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.TotalLabel.Location = new System.Drawing.Point(12, 9);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(142, 31);
-            this.TotalLabel.TabIndex = 3;
-            this.TotalLabel.Text = "Total fruits";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(848, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.button1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.StartBtn.BackColor = System.Drawing.Color.Transparent;
+            this.StartBtn.CausesValidation = false;
+            this.StartBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartBtn.Location = new System.Drawing.Point(832, 28);
+            this.StartBtn.Name = "StartBtn";
+            this.StartBtn.Size = new System.Drawing.Size(98, 38);
+            this.StartBtn.TabIndex = 4;
+            this.StartBtn.TabStop = false;
+            this.StartBtn.Text = "Start";
+            this.StartBtn.UseVisualStyleBackColor = false;
+            this.StartBtn.Click += new System.EventHandler(this.button1_Click);
+            this.StartBtn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.StartBtn.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             // 
             // TimeLabel
             // 
             this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeLabel.Location = new System.Drawing.Point(479, 28);
+            this.TimeLabel.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeLabel.Location = new System.Drawing.Point(520, 28);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(203, 63);
+            this.TimeLabel.Size = new System.Drawing.Size(166, 63);
             this.TimeLabel.TabIndex = 0;
             this.TimeLabel.Text = "Time :";
             // 
@@ -102,32 +94,54 @@ namespace Game
             // 
             this.PlayerLabel.AutoSize = true;
             this.PlayerLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerLabel.Location = new System.Drawing.Point(173, 28);
+            this.PlayerLabel.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayerLabel.Location = new System.Drawing.Point(212, 28);
             this.PlayerLabel.Name = "PlayerLabel";
-            this.PlayerLabel.Size = new System.Drawing.Size(154, 42);
+            this.PlayerLabel.Size = new System.Drawing.Size(145, 39);
             this.PlayerLabel.TabIndex = 5;
             this.PlayerLabel.Text = "Player : ";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Tomato;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.TotalLabel);
+            this.panel1.Controls.Add(this.LevelLable);
+            this.panel1.Controls.Add(this.MainMenuBtn);
+            this.panel1.Controls.Add(this.StartBtn);
             this.panel1.Controls.Add(this.TimeLabel);
             this.panel1.Controls.Add(this.PlayerLabel);
             this.panel1.Controls.Add(this.ScoreLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1034, 100);
+            this.panel1.Size = new System.Drawing.Size(1034, 101);
             this.panel1.TabIndex = 6;
+            // 
+            // LevelLable
+            // 
+            this.LevelLable.BackColor = System.Drawing.Color.Transparent;
+            this.LevelLable.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LevelLable.Location = new System.Drawing.Point(682, 28);
+            this.LevelLable.Name = "LevelLable";
+            this.LevelLable.Size = new System.Drawing.Size(144, 43);
+            this.LevelLable.TabIndex = 7;
+            this.LevelLable.Text = "Level 1";
+            // 
+            // MainMenuBtn
+            // 
+            this.MainMenuBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainMenuBtn.Location = new System.Drawing.Point(933, 28);
+            this.MainMenuBtn.Name = "MainMenuBtn";
+            this.MainMenuBtn.Size = new System.Drawing.Size(98, 38);
+            this.MainMenuBtn.TabIndex = 6;
+            this.MainMenuBtn.Text = "Exit";
+            this.MainMenuBtn.UseVisualStyleBackColor = true;
+            this.MainMenuBtn.Click += new System.EventHandler(this.MainMenuBtn_Click);
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightCoral;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(149)))), ((int)(((byte)(235)))));
             this.ClientSize = new System.Drawing.Size(1034, 761);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -150,12 +164,13 @@ namespace Game
         #endregion
         private System.Windows.Forms.Timer StartTimer;
         private System.Windows.Forms.Label ScoreLabel;
-        private System.Windows.Forms.Label TotalLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button StartBtn;
         private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Timer ClockTimer;
         private System.Windows.Forms.Label PlayerLabel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button MainMenuBtn;
+        private System.Windows.Forms.Label LevelLable;
     }
 }
 
