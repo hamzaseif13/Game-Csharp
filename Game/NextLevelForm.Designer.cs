@@ -37,7 +37,7 @@ namespace Game
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(66, 122);
+            this.label1.Location = new System.Drawing.Point(155, 170);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(675, 128);
             this.label1.TabIndex = 0;
@@ -46,7 +46,7 @@ namespace Game
             // GoNext
             // 
             this.GoNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GoNext.Location = new System.Drawing.Point(464, 318);
+            this.GoNext.Location = new System.Drawing.Point(399, 429);
             this.GoNext.Name = "GoNext";
             this.GoNext.Size = new System.Drawing.Size(298, 78);
             this.GoNext.TabIndex = 1;
@@ -58,7 +58,7 @@ namespace Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1175, 604);
             this.Controls.Add(this.GoNext);
             this.Controls.Add(this.label1);
             this.Name = "NextLevelForm";

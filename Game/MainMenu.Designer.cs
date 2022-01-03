@@ -38,8 +38,8 @@ namespace Game
             this.ChoosePlayer = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.RightPanel = new System.Windows.Forms.Panel();
             this.EditPlayerBtn = new System.Windows.Forms.Button();
+            this.RightPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.RightPanel.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,7 @@ namespace Game
             // StartGame
             // 
             this.StartGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartGame.Location = new System.Drawing.Point(557, 466);
+            this.StartGame.Location = new System.Drawing.Point(557, 449);
             this.StartGame.MaximumSize = new System.Drawing.Size(242, 44);
             this.StartGame.MinimumSize = new System.Drawing.Size(242, 44);
             this.StartGame.Name = "StartGame";
@@ -126,7 +126,7 @@ namespace Game
             this.ChoosePlayer.FormattingEnabled = true;
             this.ChoosePlayer.Location = new System.Drawing.Point(251, 234);
             this.ChoosePlayer.Name = "ChoosePlayer";
-            this.ChoosePlayer.Size = new System.Drawing.Size(297, 50);
+            this.ChoosePlayer.Size = new System.Drawing.Size(297, 61);
             this.ChoosePlayer.TabIndex = 8;
             // 
             // label1
@@ -135,7 +135,7 @@ namespace Game
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(257, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(306, 55);
+            this.label1.Size = new System.Drawing.Size(383, 69);
             this.label1.TabIndex = 9;
             this.label1.Text = "Select Player";
             // 
@@ -150,20 +150,8 @@ namespace Game
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 590);
+            this.panel1.Size = new System.Drawing.Size(278, 582);
             this.panel1.TabIndex = 10;
-            // 
-            // RightPanel
-            // 
-            this.RightPanel.Controls.Add(this.ChoosePlayer);
-            this.RightPanel.Controls.Add(this.label1);
-            this.RightPanel.Controls.Add(this.StartGame);
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightPanel.Location = new System.Drawing.Point(280, 0);
-            this.RightPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(854, 590);
-            this.RightPanel.TabIndex = 11;
             // 
             // EditPlayerBtn
             // 
@@ -178,12 +166,24 @@ namespace Game
             this.EditPlayerBtn.UseVisualStyleBackColor = true;
             this.EditPlayerBtn.Click += new System.EventHandler(this.EditPlayerBtn_Click);
             // 
+            // RightPanel
+            // 
+            this.RightPanel.Controls.Add(this.ChoosePlayer);
+            this.RightPanel.Controls.Add(this.label1);
+            this.RightPanel.Controls.Add(this.StartGame);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(278, 0);
+            this.RightPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(854, 582);
+            this.RightPanel.TabIndex = 11;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(165)))), ((int)(((byte)(165)))));
-            this.ClientSize = new System.Drawing.Size(1134, 590);
+            this.ClientSize = new System.Drawing.Size(1132, 582);
             this.Controls.Add(this.RightPanel);
             this.Controls.Add(this.panel1);
             this.MaximumSize = new System.Drawing.Size(1150, 629);

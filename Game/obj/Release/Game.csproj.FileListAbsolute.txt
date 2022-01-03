@@ -8,18 +8,9 @@ C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.GenerateResource.c
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.exe
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.pdb
-C:\Users\hamza\source\repos\Game\Game\bin\Release\libzstd.dll
-C:\Users\hamza\source\repos\Game\Game\bin\Release\snappy32.dll
-C:\Users\hamza\source\repos\Game\Game\bin\Release\snappy64.dll
-C:\Users\hamza\source\repos\Game\Game\bin\Release\libsnappy64.so
-C:\Users\hamza\source\repos\Game\Game\bin\Release\libzstd.so
-C:\Users\hamza\source\repos\Game\Game\bin\Release\libsnappy64.dylib
-C:\Users\hamza\source\repos\Game\Game\bin\Release\libzstd.dylib
 C:\Users\hamza\source\repos\Game\Game\bin\Release\mongocrypt.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\DnsClient.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Bson.dll
-C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Driver.Core.dll
-C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Driver.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Libmongocrypt.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\SharpCompress.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Buffers.dll
@@ -29,8 +20,6 @@ C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Runtime.CompilerService
 C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Text.Encoding.CodePages.dll
 C:\Users\hamza\source\repos\Game\Game\bin\Release\DnsClient.xml
 C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Bson.xml
-C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Driver.xml
-C:\Users\hamza\source\repos\Game\Game\bin\Release\MongoDB.Driver.Core.xml
 C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Buffers.xml
 C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Memory.xml
 C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Numerics.Vectors.xml
@@ -39,4 +28,4 @@ C:\Users\hamza\source\repos\Game\Game\bin\Release\System.Text.Encoding.CodePages
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.AddEditPlayer.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.GameForm.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.MainMenu.resources
-C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.csproj.CopyComplete
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.NextLevelForm.resources

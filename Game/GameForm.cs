@@ -15,13 +15,17 @@ namespace Game
     {
         int Score = 0;
         int Ticks = 0;
+        int fade = 0;
         bool left = false;
         bool right = false;
         bool up = false;
         bool down = false;
-        int seconds = 3;
+        int seconds = 120;
         int Level = 1;
+        bool isHit = false;
+        int hitIndex;
         int Speed;
+        Random rand = new Random();
         PlayerGraphic Hamza;
         List<Projectile> Projectiles;
         List<Barrier> Barriers;
@@ -50,7 +54,13 @@ namespace Game
             ClockTimer.Enabled = true;
         }        
         private void StartTimer_Tick(object sender, EventArgs e)
-        {            
+
+        {
+
+            //check if player still hitting the barrier so it the score will only lose once 
+            if (Level==2&&Barriers.Count>0)
+            if (!IsEaten(Barriers[hitIndex].Pic.Width, Barriers[hitIndex].Pic.Height, Barriers[hitIndex].Pic.Location.X, Barriers[hitIndex].Pic.Location.Y)) isHit = false;
+           
             Hamza.move(left, right, up, down,Speed);
             if (Level == 2 && Ticks%1000==0&& Barriers.Count < 3)
             {                            
@@ -60,30 +70,78 @@ namespace Game
             }
             if (Ticks % 100 == 0)
             {
-                Random rand = new Random();
-                bool isFruit = rand.Next(1, 101) > 80 ? false : true;
-                Projectile drop = new Projectile(isFruit);
+                string DropType;
+                if (Level == 1) DropType = "fruit";
+                else if (Level == 2)
+                {
+                    //stars and sandclock
+                    DropType = rand.Next(0, 100) < 11 ? "reward" : "fruit";
+                }
+                else
+                {
+                    //stars and sandclock 
+                    //bombs and skulls
+                    DropType = rand.Next(0, 100) < 11 ? "reward" : rand.Next(0, 100) > 70 ? "bomb" : "fruit";
+                }
+                Projectile drop = new Projectile(DropType);
                 Projectiles.Add(drop);
                 this.Controls.Add(drop.Pic);
             }
-            int currentticks = Ticks;
             //check if the player hits a barrier
             for (int j = 0; j < Barriers.Count; j++)
-            {
-                if (IsEaten(Barriers[j].Pic.Width, Barriers[j].Pic.Height, Barriers[j].Pic.Location.X, Barriers[j].Pic.Location.Y))
+            {                
+                if ((!isHit)&&IsEaten(Barriers[j].Pic.Width, Barriers[j].Pic.Height, Barriers[j].Pic.Location.X, Barriers[j].Pic.Location.Y))
                 {
                     Score -= 10;
+                    isHit = true;
+                    hitIndex = j;
                     ScoreLabel.Text = "score : " + Score.ToString();  
                 }
             }
             //checks if a player eat a fruit or a bomb
-                for (int j = 0; j < Projectiles.Count; j++)
+            for (int j = 0; j < Projectiles.Count; j++)
             {             
                 Projectiles[j].Move();               
                 if (IsEaten(Projectiles[j].Pic.Width, Projectiles[j].Pic.Height, Projectiles[j].Pic.Location.X, Projectiles[j].Pic.Location.Y))
                 {
-                    Score = Projectiles[j].IsFruit ? Score + 10 : Score - 10;
-                    ScoreLabel.Text = "score : " + Score.ToString();
+                    if (Projectiles[j].Type == "fruit")
+                    {
+                        Score += 10;
+                        UpdateLabel.Text = "+ 10 Points ";
+                        UpdateLabel.Visible = true;
+                        FadeTimer.Enabled = true;
+
+
+                    }
+                    else if (Projectiles[j].Type == "bomb")
+                    { 
+                         Score -= 10;
+                         UpdateLabel.Text = "- 10 Points ";
+                        UpdateLabel.Visible = true;
+
+                        FadeTimer.Enabled = true;
+                    }
+                    else
+                    {
+                        if (Projectiles[j].isStar)
+                        {
+                            Score += 15;
+                            UpdateLabel.Text = "+ 15 Points ";
+                            UpdateLabel.Visible = true;
+
+                            FadeTimer.Enabled = true;
+                        }
+
+                        else {
+                            seconds += 15;
+                            UpdateLabel.Text = "+ 15 seconds ";
+                            UpdateLabel.Visible = true;
+
+                            FadeTimer.Enabled = true;
+                        }
+                        
+                    }
+                    ScoreLabel.Text = "Score : " + Score.ToString();
                     Projectiles[j].Pic.Visible = false;
                     Projectiles.RemoveAt(j);
                     j--;
@@ -100,8 +158,6 @@ namespace Game
         }
         private bool IsEaten(int W,int H,int X,int Y)
         {
-
-
             double rect1x = X;
             double rect2x = Hamza.Pic.Location.X;
             double rect1y = Y;
@@ -158,6 +214,14 @@ namespace Game
         }
         private void ChangeLevel ()
         {
+            if (Level == 3)
+            {
+                NextLevelForm nextLevelForm1 = new NextLevelForm(Level - 1, RealTimePlayer.Name,true);
+                nextLevelForm1.ShowDialog();
+                
+                return;
+            }
+            TimeLabel.Text = "Time:";
             Level=Level+1;
             StartTimer.Enabled = false;
             ClockTimer.Enabled = false;
@@ -165,8 +229,8 @@ namespace Game
             right = false;
             up = false;
             down = false;
-            NextLevelForm nextLevelForm = new NextLevelForm(Level,RealTimePlayer.Name);
-            nextLevelForm.ShowDialog();            
+            NextLevelForm nextLevelForm = new NextLevelForm(Level-1,RealTimePlayer.Name);
+            nextLevelForm.ShowDialog();
             seconds = 120;
             Score = 0;
             Ticks = 0;
@@ -175,8 +239,12 @@ namespace Game
             foreach (Projectile proj in Projectiles)
             {
                 proj.Pic.Visible = false;
-
             }
+            foreach (Barrier barrier in Barriers)
+            {
+                barrier.Pic.Visible = false;
+            }
+            Barriers.Clear();
             Projectiles.Clear();
             StartBtn.Text = "Start";
             Hamza.Pic.Location = new Point(470, 500);
@@ -185,7 +253,29 @@ namespace Game
 
         private void MainMenuBtn_Click(object sender, EventArgs e)
         {
+           
             this.Close();
+        }
+
+        private void NextLevelBtn_Click(object sender, EventArgs e)
+        {
+            if (Level == 2) NextLevelBtn.Enabled = false; ;
+
+            ChangeLevel();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (fade == 50)
+            {
+                UpdateLabel.Visible = false;
+                UpdateLabel.Location = new Point(this.Width / 2 - 265 / 2, 130);
+                fade = 0;
+                FadeTimer.Enabled = false;
+            }
+            UpdateLabel.Location = new Point(UpdateLabel.Location.X, UpdateLabel.Location.Y-1);
+            fade++;
+           
         }
     }
     class PlayerGraphic
@@ -212,17 +302,37 @@ namespace Game
         }
     }
     class Projectile
-    {
-        //sync test
+    {       
         public PictureBox Pic;
-        public bool IsFruit;
-        public Projectile(bool IsFruit)
+        public string  Type;
+        public bool isFruit;
+        public bool isSand;
+        public bool isStar;
+        public Projectile(string type)
         {
-            this.IsFruit = IsFruit;
-            string current;            
-            string[] imgs = new string[] { "banana.png", "apple.png", "strawberry.png" };
+            this.Type = type;
             Random rand = new Random();
-            current = this.IsFruit ? current = imgs[rand.Next(0, 3)] : current = "bomb.png";
+            string current;            
+            string[] fruits = new string[] { "banana.png", "apple.png", "strawberry.png" };
+            string[] bomb = new string[] {"bomb.png" ,"skull.png"};
+            string[] reward = new string[] {"star.png","sandclock.png" };
+            if (this.Type == "fruit")
+            {
+                this.isFruit = true;
+                current = fruits[rand.Next(0, 3)];
+            }
+            else if (this.Type == "reward")
+            {
+                current = reward[rand.Next(0, 2)];
+                if (current == "sandclock.png") this.isSand = true;
+                else this.isStar = true;
+            }
+            else
+            {
+                current = bomb[rand.Next(0, 2)];
+                this.isFruit = false;
+            }
+            
             Pic = new PictureBox()
             {
                 Size = new Size(100, 100),
@@ -233,6 +343,9 @@ namespace Game
                 
             };
         }
+
+        public bool IsFruit { get; internal set; }
+
         public void Move()
         {
             Pic.Top += 2;
