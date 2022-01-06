@@ -16,10 +16,11 @@ namespace Game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           
             MainMenu startForm = new MainMenu();
             DataTracker.MainForm= startForm;
             Application.Run(startForm);
-            
+          
             
         }
     }

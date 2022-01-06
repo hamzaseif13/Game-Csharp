@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 //new commit test
 namespace Game
 {
-    
+   
     public partial class GameForm : Form
     {
+        //string recorder = "";
+        Dictionary<int, Dir> History;
         int Score = 0;
         int Ticks = 0;
         int fade = 0;
+        //int ReplayTick = 0;
+        int TotalDuration = 0;
+        int TotalScore = 0;
         bool left = false;
         bool right = false;
         bool up = false;
@@ -24,15 +31,22 @@ namespace Game
         int Level = 1;
         bool isHit = false;
         int hitIndex;
+        bool SoundIsOn = true;
         int Speed;
+        bool replay = false;
         Random rand = new Random();
         PlayerGraphic Hamza;
         List<Projectile> Projectiles;
         List<Barrier> Barriers;
         private PlayerObj RealTimePlayer;
-        public GameForm()
+        public GameForm(bool replay)
         {        
-            InitializeComponent();           
+            InitializeComponent();
+            this.replay = replay;
+            if (replay)
+            {
+                StartTimer.Interval = 1000;
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -47,9 +61,11 @@ namespace Game
             else if (RealTimePlayer.Color == "Green") this.BackColor = Color.FromArgb(41, 196, 85);
             LevelLable.Text = "Level " + Level;
             Speed = 5;
+            History = new Dictionary<int, Dir>();
         }
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            
             StartTimer.Enabled = true;
             ClockTimer.Enabled = true;
         }        
@@ -57,6 +73,7 @@ namespace Game
 
         {
 
+            if (replay) return;
             //check if player still hitting the barrier so it the score will only lose once 
             if (Level==2&&Barriers.Count>0)
             if (!IsEaten(Barriers[hitIndex].Pic.Width, Barriers[hitIndex].Pic.Height, Barriers[hitIndex].Pic.Location.X, Barriers[hitIndex].Pic.Location.Y)) isHit = false;
@@ -81,7 +98,10 @@ namespace Game
                 {
                     //stars and sandclock 
                     //bombs and skulls
-                    DropType = rand.Next(0, 100) < 11 ? "reward" : rand.Next(0, 100) > 70 ? "bomb" : "fruit";
+                    int x = rand.Next(0, 100);
+                    if (x > 40) DropType = "fruit";
+                    else if (x < 10) DropType = "bomb";
+                    else DropType = "reward";
                 }
                 Projectile drop = new Projectile(DropType);
                 Projectiles.Add(drop);
@@ -95,7 +115,10 @@ namespace Game
                     Score -= 10;
                     isHit = true;
                     hitIndex = j;
-                    ScoreLabel.Text = "score : " + Score.ToString();  
+                    ScoreLabel.Text = "score : " + Score.ToString();
+                    UpdateLabel.Text = "- 10 Points ";
+                    UpdateLabel.Visible = true;
+                    FadeTimer.Enabled = true;
                 }
             }
             //checks if a player eat a fruit or a bomb
@@ -106,25 +129,40 @@ namespace Game
                 {
                     if (Projectiles[j].Type == "fruit")
                     {
+                        if (SoundIsOn) {
+                            SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
+                            bomb.Play();
+                        }
+                        
                         Score += 10;
                         UpdateLabel.Text = "+ 10 Points ";
                         UpdateLabel.Visible = true;
                         FadeTimer.Enabled = true;
-
+                        
 
                     }
                     else if (Projectiles[j].Type == "bomb")
-                    { 
-                         Score -= 10;
+                    {
+                        if (SoundIsOn)
+                        {
+                            SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\bom.wav");
+                            bomb.Play();
+                        }
+                        Score -= 10;
                          UpdateLabel.Text = "- 10 Points ";
                         UpdateLabel.Visible = true;
-
+                        
                         FadeTimer.Enabled = true;
                     }
                     else
                     {
                         if (Projectiles[j].isStar)
                         {
+                            if (SoundIsOn)
+                            {
+                                SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
+                                bomb.Play();
+                            }
                             Score += 15;
                             UpdateLabel.Text = "+ 15 Points ";
                             UpdateLabel.Visible = true;
@@ -133,6 +171,11 @@ namespace Game
                         }
 
                         else {
+                            if (SoundIsOn)
+                            {
+                                SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
+                                bomb.Play();
+                            }
                             seconds += 15;
                             UpdateLabel.Text = "+ 15 seconds ";
                             UpdateLabel.Visible = true;
@@ -176,7 +219,7 @@ namespace Game
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             //left = x top = y
-
+            File.WriteAllText(@"C:\Users\hamza\Desktop\project-assest\h.txt", "jsadjsajd"); 
             if (e.KeyCode == Keys.A) left = true;
             if (e.KeyCode == Keys.D) right = true;
             if (e.KeyCode == Keys.W) up = true;
@@ -197,16 +240,19 @@ namespace Game
             {
 
                 StartTimer.Enabled = false;
+                //ReplayTimer.Enabled = false;
                 ClockTimer.Enabled = false;
                 return;
             }
             StartBtn.Text = "Puase";
             StartTimer.Enabled = true;
+            //ReplayTimer.Enabled = true;
             ClockTimer.Enabled = true;
            
         }   
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
+            
             seconds--;
             TimeLabel.Text = "Time:" + seconds.ToString();
             if (seconds == 0) ChangeLevel();
@@ -231,6 +277,8 @@ namespace Game
             down = false;
             NextLevelForm nextLevelForm = new NextLevelForm(Level-1,RealTimePlayer.Name);
             nextLevelForm.ShowDialog();
+            TotalScore += Score;
+            TotalDuration += 120-seconds;
             seconds = 120;
             Score = 0;
             Ticks = 0;
@@ -253,7 +301,6 @@ namespace Game
 
         private void MainMenuBtn_Click(object sender, EventArgs e)
         {
-           
             this.Close();
         }
 
@@ -263,7 +310,7 @@ namespace Game
 
             ChangeLevel();
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private void FadeTimer_Tick(object sender, EventArgs e)
         {
 
             if (fade == 50)
@@ -277,7 +324,73 @@ namespace Game
             fade++;
            
         }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TotalScore = TotalScore == 0 ? Score : TotalScore;
+            DataTracker.AddScore(TotalScore);
+            TotalDuration = TotalDuration == 0 ? 120 - seconds : TotalDuration;
+            DataTracker.AddDuration(TotalDuration);
+            RealTimePlayer.GamesHistory.Add(new Game(TotalScore,Level,TotalDuration));
+
+        }
+        /*
+        private void ReplayTimer_Tick(object sender, EventArgs e)
+        {
+            if (replay)
+            {
+                if (ReplayTick >= RealTimePlayer.History.Count)
+                {
+                    ReplayTimer.Enabled = false;
+                    PlayerLabel.Text = "ur don pice cso f siht";
+                    return;
+                }
+                
+                left = RealTimePlayer.History[ReplayTick].left;
+                up = RealTimePlayer.History[ReplayTick].up;
+                down = RealTimePlayer.History[ReplayTick].down;
+                right = RealTimePlayer.History[ReplayTick].right;
+
+                Hamza.move(left, right, up, down, Speed);
+                ReplayTick++;
+                return;
+            }
+
+            History[ReplayTick] = new Dir(up, right, left, down);
+            ReplayTick++;
+        }
+        */
+        private void SoundToggle_Click(object sender, EventArgs e)
+        {
+            if (SoundIsOn)
+            {
+                SoundIsOn = false;
+                SoundToggle.Text = "Turn on sound";
+            }
+            else
+            {
+                SoundIsOn = true;
+                SoundToggle.Text = "Turn Off sound";
+            }
+        }
     }
+
+    public class Dir
+    {
+        public bool left, right, up, down;
+        public Dir(bool up,bool right ,bool down,bool left)
+        {
+            this.left = left;
+            this.right = right;
+            this.down = down;
+            this.up = up;
+        }
+        public override string ToString()
+        {
+            return ($"up:{up} right:{right} down:{down} left:{left}");
+        }
+    }
+
     class PlayerGraphic
     {
         public PictureBox Pic;

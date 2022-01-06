@@ -14,19 +14,13 @@ namespace Game
     public partial class MainMenu : Form
     {
         public Form CurrentForm=new Form();
-        public string CurrentPlayer { get; set; }
+       
         public MainMenu()
         {
             InitializeComponent();
             DataTracker.Players = new List<PlayerObj>();
-            DataTracker.AddPlayer("hamza", 21, "Male", "Blue");
-            DataTracker.AddPlayer("josh", 21, "Male", "Blue");
-            DataTracker.AddPlayer("madina", 21, "Male", "Blue");
-            foreach (var x in DataTracker.Players)
-            {
-                ChoosePlayer.Items.Add(x.Name);
-            }
-            ChoosePlayer.SelectedItem = DataTracker.Players[0].Name;
+            
+            
         }
         public  void Refreshl()
         {
@@ -40,23 +34,28 @@ namespace Game
 
         private void StartGame_Click(object sender, EventArgs e)
         {
-            var q1 = from player in DataTracker.Players where player.Name == ChoosePlayer.Text select player;
-
-            
-            DataTracker.currentPlayer = q1.First(); 
-            GameForm g = new GameForm();
-            g.ShowDialog();
+            if (DataTracker.Players.Count > 0)
+            {
+                var q1 = from player in DataTracker.Players where player.Name == ChoosePlayer.Text select player;
+                DataTracker.currentPlayer = q1.First();
+                GameForm g = new GameForm(false);
+                g.ShowDialog();
+                return;
+            }
+            Error.Visible = true;
             //this.Close();
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
             this.Close();
-           
         }
 
         private void NewPlayer_Click(object sender, EventArgs e)
         {
+            Error.Visible = false;
+
+            this.RightPanel.Controls.Remove(CurrentForm);
             CurrentForm = new AddEditPlayer(null);
             CurrentForm.TopLevel = false;
             CurrentForm.FormBorderStyle = FormBorderStyle.None;
@@ -68,9 +67,29 @@ namespace Game
 
         private void EditPlayerBtn_Click(object sender, EventArgs e)
         {
-             var q1 = from player in DataTracker.Players where player.Name == ChoosePlayer.Text select player;
 
-            CurrentForm = new AddEditPlayer(q1.First());
+            if (DataTracker.Players.Count > 0)
+            {
+                var q1 = from player in DataTracker.Players where player.Name == ChoosePlayer.Text select player;
+                this.RightPanel.Controls.Remove(CurrentForm);
+                CurrentForm = new AddEditPlayer(q1.First());
+                CurrentForm.TopLevel = false;
+                CurrentForm.FormBorderStyle = FormBorderStyle.None;
+                CurrentForm.Dock = DockStyle.Fill;
+                this.RightPanel.Controls.Add(CurrentForm);
+                CurrentForm.BringToFront();
+                CurrentForm.Show();return;
+            }
+            Error.Visible = true;
+            
+        }
+
+        private void Statistics_Click(object sender, EventArgs e)
+        {
+           
+
+            this.RightPanel.Controls.Remove(CurrentForm);
+            CurrentForm = new ReportForm(DataTracker.NumberOfGames,DataTracker.Players.Count,DataTracker.HighestScore,DataTracker.LowestScore, DataTracker.MinimumDuration, DataTracker.MaximumDuration, DataTracker.TotalDuration);
             CurrentForm.TopLevel = false;
             CurrentForm.FormBorderStyle = FormBorderStyle.None;
             CurrentForm.Dock = DockStyle.Fill;
@@ -78,6 +97,26 @@ namespace Game
             CurrentForm.BringToFront();
             CurrentForm.Show();
         }
+
+        private void History_Click(object sender, EventArgs e)
+        {
+            GameInfo.Count = 0;
+            this.RightPanel.Controls.Remove(CurrentForm);
+            CurrentForm = new HistoryForm();
+            CurrentForm.TopLevel = false;
+            CurrentForm.FormBorderStyle = FormBorderStyle.None;
+            CurrentForm.Dock = DockStyle.Fill;
+            this.RightPanel.Controls.Add(CurrentForm);
+            CurrentForm.BringToFront();
+            CurrentForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.RightPanel.Controls.Remove(CurrentForm);
+
+        }
+       
     }
     
 }

@@ -29,3 +29,5 @@ C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.MainMenu.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.GameForm.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.AddEditPlayer.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.NextLevelForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.ReportForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.HistoryForm.resources

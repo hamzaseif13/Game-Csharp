@@ -12,10 +12,11 @@ namespace Game
 {
     public partial class AddEditPlayer : Form
     {
-        private PlayerObj Current;
         
-        public AddEditPlayer(PlayerObj CurrentPlayer=null)
+        private PlayerObj Current;
+        public AddEditPlayer(PlayerObj CurrentPlayer)
         {
+            
             InitializeComponent();
             if (CurrentPlayer == null)
             {
@@ -54,6 +55,7 @@ namespace Game
 
         private void CloseBtn_Click(object sender, EventArgs e)
         {
+            
             this.Close();
         }
     }
