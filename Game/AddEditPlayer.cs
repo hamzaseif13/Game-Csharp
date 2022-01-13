@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Game
 {
     public partial class AddEditPlayer : Form
@@ -54,8 +55,7 @@ namespace Game
         }
 
         private void CloseBtn_Click(object sender, EventArgs e)
-        {
-            
+        {            
             this.Close();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
+
 //new commit test
 namespace Game
 {
@@ -31,7 +32,7 @@ namespace Game
         int Level = 1;
         bool isHit = false;
         int hitIndex;
-        bool SoundIsOn = true;
+      
         int Speed;
         bool replay = false;
         Random rand = new Random();
@@ -50,11 +51,11 @@ namespace Game
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            RealTimePlayer = DataTracker.currentPlayer;
             Projectiles = new List<Projectile>();
             Barriers = new List<Barrier>();
-            Hamza = new PlayerGraphic();
-            this.Controls.Add(Hamza.Pic);
-            RealTimePlayer = DataTracker.currentPlayer;
+            Hamza = new PlayerGraphic(RealTimePlayer.Gender);
+            this.Controls.Add(Hamza.Pic);           
             PlayerLabel.Text += RealTimePlayer.Name;
             if(RealTimePlayer.Color=="Blue")this.BackColor = Color.FromArgb(52, 149, 235);
             else if(RealTimePlayer.Color=="Purple") this.BackColor = Color.FromArgb(111, 66, 184);
@@ -99,8 +100,8 @@ namespace Game
                     //stars and sandclock 
                     //bombs and skulls
                     int x = rand.Next(0, 100);
-                    if (x > 40) DropType = "fruit";
-                    else if (x < 10) DropType = "bomb";
+                    if (x < 80) DropType = "fruit";
+                    else if (x < 90) DropType = "bomb";
                     else DropType = "reward";
                 }
                 Projectile drop = new Projectile(DropType);
@@ -129,11 +130,7 @@ namespace Game
                 {
                     if (Projectiles[j].Type == "fruit")
                     {
-                        if (SoundIsOn) {
-                            SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
-                            bomb.Play();
-                        }
-                        
+                       
                         Score += 10;
                         UpdateLabel.Text = "+ 10 Points ";
                         UpdateLabel.Visible = true;
@@ -143,11 +140,6 @@ namespace Game
                     }
                     else if (Projectiles[j].Type == "bomb")
                     {
-                        if (SoundIsOn)
-                        {
-                            SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\bom.wav");
-                            bomb.Play();
-                        }
                         Score -= 10;
                          UpdateLabel.Text = "- 10 Points ";
                         UpdateLabel.Visible = true;
@@ -158,11 +150,7 @@ namespace Game
                     {
                         if (Projectiles[j].isStar)
                         {
-                            if (SoundIsOn)
-                            {
-                                SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
-                                bomb.Play();
-                            }
+                           
                             Score += 15;
                             UpdateLabel.Text = "+ 15 Points ";
                             UpdateLabel.Visible = true;
@@ -171,11 +159,7 @@ namespace Game
                         }
 
                         else {
-                            if (SoundIsOn)
-                            {
-                                SoundPlayer bomb = new SoundPlayer(@"C:\Users\hamza\Desktop\project-assest\reward.wav");
-                                bomb.Play();
-                            }
+                           
                             seconds += 15;
                             UpdateLabel.Text = "+ 15 seconds ";
                             UpdateLabel.Visible = true;
@@ -219,7 +203,7 @@ namespace Game
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             //left = x top = y
-            File.WriteAllText(@"C:\Users\hamza\Desktop\project-assest\h.txt", "jsadjsajd"); 
+           
             if (e.KeyCode == Keys.A) left = true;
             if (e.KeyCode == Keys.D) right = true;
             if (e.KeyCode == Keys.W) up = true;
@@ -255,7 +239,7 @@ namespace Game
             
             seconds--;
             TimeLabel.Text = "Time:" + seconds.ToString();
-            if (seconds == 0) ChangeLevel();
+            if (seconds == 0||Score>300) ChangeLevel();
             
         }
         private void ChangeLevel ()
@@ -327,52 +311,15 @@ namespace Game
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TotalScore = TotalScore == 0 ? Score : TotalScore;
-            DataTracker.AddScore(TotalScore);
-            TotalDuration = TotalDuration == 0 ? 120 - seconds : TotalDuration;
-            DataTracker.AddDuration(TotalDuration);
-            RealTimePlayer.GamesHistory.Add(new Game(TotalScore,Level,TotalDuration));
+            TotalScore = TotalScore == 0 ? Score : TotalScore;            
+            TotalDuration = TotalDuration == 0 ? 120 - seconds : TotalDuration;            
+            RealTimePlayer.AddGame(TotalScore,Level,TotalDuration);
+            DataTracker.NumberOfGames++;
+            DataTracker.TotalDuration += TotalDuration;
 
         }
-        /*
-        private void ReplayTimer_Tick(object sender, EventArgs e)
-        {
-            if (replay)
-            {
-                if (ReplayTick >= RealTimePlayer.History.Count)
-                {
-                    ReplayTimer.Enabled = false;
-                    PlayerLabel.Text = "ur don pice cso f siht";
-                    return;
-                }
-                
-                left = RealTimePlayer.History[ReplayTick].left;
-                up = RealTimePlayer.History[ReplayTick].up;
-                down = RealTimePlayer.History[ReplayTick].down;
-                right = RealTimePlayer.History[ReplayTick].right;
-
-                Hamza.move(left, right, up, down, Speed);
-                ReplayTick++;
-                return;
-            }
-
-            History[ReplayTick] = new Dir(up, right, left, down);
-            ReplayTick++;
-        }
-        */
-        private void SoundToggle_Click(object sender, EventArgs e)
-        {
-            if (SoundIsOn)
-            {
-                SoundIsOn = false;
-                SoundToggle.Text = "Turn on sound";
-            }
-            else
-            {
-                SoundIsOn = true;
-                SoundToggle.Text = "Turn Off sound";
-            }
-        }
+      
+        
     }
 
     public class Dir
@@ -394,17 +341,26 @@ namespace Game
     class PlayerGraphic
     {
         public PictureBox Pic;
-        public PlayerGraphic()
+        public PlayerGraphic(string gender)
         {
+            
             Pic = new PictureBox()
             {
-                Size = new Size(100, 100),
+                Size = new Size(150, 150),
                 Location = new Point(470, 500),
-                ImageLocation = @"C:\Users\hamza\Desktop\project-assest\mouth.png",
                 Name = "hamza",
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 BackColor = Color.Transparent
             };
+            if (gender == "Male")
+            {
+                Pic.Image = Resources.male;
+            }
+            else
+            {
+                Pic.Size = new Size(120, 120);
+                Pic.Image = Resources.female;
+            }
         }
         public void move(bool left, bool right, bool up, bool down,int speed)
         {
@@ -433,6 +389,7 @@ namespace Game
             {
                 this.isFruit = true;
                 current = fruits[rand.Next(0, 3)];
+
             }
             else if (this.Type == "reward")
             {
@@ -445,16 +402,22 @@ namespace Game
                 current = bomb[rand.Next(0, 2)];
                 this.isFruit = false;
             }
-            
+
             Pic = new PictureBox()
             {
                 Size = new Size(100, 100),
                 Location = new Point(150 * rand.Next(0, 7), 0),
-                ImageLocation = @"C:\Users\hamza\Desktop\project-assest\" + current,
                 Name = "hamza",
                 SizeMode = PictureBoxSizeMode.StretchImage
-                
             };
+            if (current == "bomb.png") Pic.Image = Resources.bomb;
+            if (current == "banana.png") Pic.Image = Resources.banana;
+            if (current == "apple.png") Pic.Image = Resources.apple;
+            if (current == "strawberry.png") Pic.Image = Resources.strawberry;
+            if (current == "skull.png") Pic.Image = Resources.skull;
+            if (current == "star.png") Pic.Image = Resources.star;
+            if (current == "sandclock.png") Pic.Image = Resources.sandclock;
+            
         }
 
         public bool IsFruit { get; internal set; }

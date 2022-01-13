@@ -1,7 +1,7 @@
 ﻿
 namespace Game
 {
-    partial class ReportForm
+    partial class StatisticsForm
     {
         /// <summary>
         /// Required designer variable.

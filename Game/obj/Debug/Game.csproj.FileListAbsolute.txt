@@ -1,4 +1,3 @@
-C:\Users\hamza\source\repos\Game\Game\bin\Debug\Resources\banana1.png
 C:\Users\hamza\source\repos\Game\Game\bin\Debug\Game.exe.config
 C:\Users\hamza\source\repos\Game\Game\bin\Debug\Game.exe
 C:\Users\hamza\source\repos\Game\Game\bin\Debug\Game.pdb
@@ -29,5 +28,5 @@ C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.MainMenu.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.GameForm.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.AddEditPlayer.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.NextLevelForm.resources
-C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.ReportForm.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.HistoryForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Debug\Game.StatisticsForm.resources

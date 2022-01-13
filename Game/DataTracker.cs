@@ -15,26 +15,11 @@ namespace Game
         public static List<PlayerObj> Players;
         public static int NumberOfGames = 0;
         public static int HighestScore=0;
-        public static int LowestScore=100000;
-        public static int MinimumDuration=100000;
+        public static int LowestScore=1000000;
+        public static int MinimumDuration=1000000;
         public static int MaximumDuration=0;
         public static int TotalDuration=0;
-        public static void AddScore(int Score)
-        {
-            //use Linq
-            if (Score > HighestScore) HighestScore = Score;
-            if (Score < LowestScore) LowestScore = Score;
-            NumberOfGames++;
-        }
-        public static void AddDuration(int Seconds)
-        {
-            //use Linq
-
-            if (Seconds > MaximumDuration) MaximumDuration = Seconds;
-            if (Seconds < MinimumDuration) MinimumDuration = Seconds;
-            TotalDuration += Seconds;
-
-        }
+        
         public static void AddPlayer (string name, int age, string gender, string color)
         {           
             PlayerObj lol = new PlayerObj(name, age, gender, color);
@@ -48,6 +33,10 @@ namespace Game
         public int Age;
         public string Gender;
         public string Color;
+        public int HighestScore;
+        public int LowestScore;
+        public int MaxDuration;
+        public int MinDuration;
         public List<Game> GamesHistory;
         public PlayerObj(string name,int age,string gender,string color)
         {           
@@ -57,9 +46,19 @@ namespace Game
             this.Color = color;
             this.GamesHistory = new List<Game>();
         }
-        public void AddGame(int score,int duration,int level)
+        public void AddGame(int score, int level,int duration)
         {
+
             this.GamesHistory.Add(new Game(score,level,duration));
+            var HighQuery  = from s in GamesHistory orderby s.GameScore descending select s.GameScore;
+            HighestScore = HighQuery.First();
+            var LowQuery = from s in GamesHistory orderby s.GameScore  select s.GameScore;
+            LowestScore  = LowQuery.First();
+            var Max= from s in GamesHistory orderby s.GameDuration descending select s.GameDuration;
+            MaxDuration = Max.First();
+            var Min = from s in GamesHistory orderby s.GameDuration select s.GameDuration;
+            MinDuration = Min.First();
+
         }
         public void EditPlayer(string name, int age, string gender, string color)
         {

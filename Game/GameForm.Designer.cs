@@ -37,7 +37,6 @@ namespace Game
             this.ClockTimer = new System.Windows.Forms.Timer(this.components);
             this.PlayerLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.SoundToggle = new System.Windows.Forms.Button();
             this.NextLevelBtn = new System.Windows.Forms.Button();
             this.LevelLable = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
@@ -108,7 +107,6 @@ namespace Game
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Tomato;
-            this.panel1.Controls.Add(this.SoundToggle);
             this.panel1.Controls.Add(this.NextLevelBtn);
             this.panel1.Controls.Add(this.LevelLable);
             this.panel1.Controls.Add(this.CloseBtn);
@@ -121,16 +119,6 @@ namespace Game
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1034, 101);
             this.panel1.TabIndex = 6;
-            // 
-            // SoundToggle
-            // 
-            this.SoundToggle.Location = new System.Drawing.Point(832, 68);
-            this.SoundToggle.Name = "SoundToggle";
-            this.SoundToggle.Size = new System.Drawing.Size(98, 23);
-            this.SoundToggle.TabIndex = 9;
-            this.SoundToggle.Text = "Turn off sound";
-            this.SoundToggle.UseVisualStyleBackColor = true;
-            this.SoundToggle.Click += new System.EventHandler(this.SoundToggle_Click);
             // 
             // NextLevelBtn
             // 
@@ -186,15 +174,15 @@ namespace Game
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(149)))), ((int)(((byte)(235)))));
-            this.ClientSize = new System.Drawing.Size(1034, 761);
+            this.ClientSize = new System.Drawing.Size(1034, 760);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.UpdateLabel);
             this.DoubleBuffered = true;
             this.HelpButton = true;
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(1050, 800);
+            this.MaximumSize = new System.Drawing.Size(1050, 799);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1050, 800);
+            this.MinimumSize = new System.Drawing.Size(1050, 799);
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
@@ -221,7 +209,6 @@ namespace Game
         private System.Windows.Forms.Button NextLevelBtn;
         private System.Windows.Forms.Label UpdateLabel;
         private System.Windows.Forms.Timer FadeTimer;
-        private System.Windows.Forms.Button SoundToggle;
     }
 }
 

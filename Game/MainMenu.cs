@@ -81,7 +81,7 @@ namespace Game
                 CurrentForm.Show();return;
             }
             Error.Visible = true;
-            
+            this.RightPanel.Controls.Remove(CurrentForm);
         }
 
         private void Statistics_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace Game
            
 
             this.RightPanel.Controls.Remove(CurrentForm);
-            CurrentForm = new ReportForm(DataTracker.NumberOfGames,DataTracker.Players.Count,DataTracker.HighestScore,DataTracker.LowestScore, DataTracker.MinimumDuration, DataTracker.MaximumDuration, DataTracker.TotalDuration);
+            CurrentForm = new StatisticsForm();
             CurrentForm.TopLevel = false;
             CurrentForm.FormBorderStyle = FormBorderStyle.None;
             CurrentForm.Dock = DockStyle.Fill;
