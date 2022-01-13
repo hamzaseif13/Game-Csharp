@@ -1,4 +1,3 @@
-C:\Users\hamza\source\repos\Game\Game\bin\Release\Resources\banana1.png
 C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.exe.config
 C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.exe
 C:\Users\hamza\source\repos\Game\Game\bin\Release\Game.pdb
@@ -29,3 +28,5 @@ C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.AddEditPlayer.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.GameForm.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.MainMenu.resources
 C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.NextLevelForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.HistoryForm.resources
+C:\Users\hamza\source\repos\Game\Game\obj\Release\Game.StatisticsForm.resources
