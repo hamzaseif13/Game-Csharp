@@ -17,7 +17,6 @@ namespace Game
     public partial class GameForm : Form
     {
         //string recorder = "";
-        Dictionary<int, Dir> History;
         int Score = 0;
         int Ticks = 0;
         int fade = 0;
@@ -62,7 +61,6 @@ namespace Game
             else if (RealTimePlayer.Color == "Green") this.BackColor = Color.FromArgb(41, 196, 85);
             LevelLable.Text = "Level " + Level;
             Speed = 5;
-            History = new Dictionary<int, Dir>();
         }
         private void StartBtn_Click(object sender, EventArgs e)
         {
@@ -116,7 +114,7 @@ namespace Game
                     Score -= 10;
                     isHit = true;
                     hitIndex = j;
-                    ScoreLabel.Text = "score : " + Score.ToString();
+                    ScoreLabel.Text = "Score : " + Score.ToString();
                     UpdateLabel.Text = "- 10 Points ";
                     UpdateLabel.Visible = true;
                     FadeTimer.Enabled = true;
@@ -219,6 +217,7 @@ namespace Game
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            lol.Visible = false;
             //LevelLable.Text = "Level " + Level.ToString();
             if (StartTimer.Enabled == true)
             {
@@ -251,7 +250,7 @@ namespace Game
                 
                 return;
             }
-            TimeLabel.Text = "Time:";
+            TimeLabel.Text = "Time:00";
             Level=Level+1;
             StartTimer.Enabled = false;
             ClockTimer.Enabled = false;
@@ -267,6 +266,7 @@ namespace Game
             Score = 0;
             Ticks = 0;
             Speed = 6;
+            ScoreLabel.Text = "Score : 0" ;
             LevelLable.Text = "Level " + Level;
             foreach (Projectile proj in Projectiles)
             {
@@ -311,8 +311,12 @@ namespace Game
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TotalScore = TotalScore == 0 ? Score : TotalScore;            
-            TotalDuration = TotalDuration == 0 ? 120 - seconds : TotalDuration;            
+            if (Level == 1)
+            {
+                RealTimePlayer.AddGame(Score, Level, 120 - seconds);return;
+            }
+            TotalScore += Score;
+            TotalDuration += 120 - seconds;
             RealTimePlayer.AddGame(TotalScore,Level,TotalDuration);
             DataTracker.NumberOfGames++;
             DataTracker.TotalDuration += TotalDuration;
@@ -322,21 +326,7 @@ namespace Game
         
     }
 
-    public class Dir
-    {
-        public bool left, right, up, down;
-        public Dir(bool up,bool right ,bool down,bool left)
-        {
-            this.left = left;
-            this.right = right;
-            this.down = down;
-            this.up = up;
-        }
-        public override string ToString()
-        {
-            return ($"up:{up} right:{right} down:{down} left:{left}");
-        }
-    }
+    
 
     class PlayerGraphic
     {
@@ -437,7 +427,7 @@ namespace Game
             {
                 Size = new Size(130,30),
                 Location = new Point(rand.Next(20,900),rand.Next(200,800)),
-                ImageLocation = @"C:\Users\hamza\Desktop\project-assest\brickwall.png" ,
+                Image=Resources.brickwall,
                 Name = "hamza",
                 SizeMode = PictureBoxSizeMode.StretchImage
 

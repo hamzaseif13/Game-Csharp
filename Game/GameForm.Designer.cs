@@ -42,6 +42,7 @@ namespace Game
             this.CloseBtn = new System.Windows.Forms.Button();
             this.UpdateLabel = new System.Windows.Forms.Label();
             this.FadeTimer = new System.Windows.Forms.Timer(this.components);
+            this.lol = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,9 +59,9 @@ namespace Game
             this.ScoreLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ScoreLabel.Location = new System.Drawing.Point(24, 27);
             this.ScoreLabel.Name = "ScoreLabel";
-            this.ScoreLabel.Size = new System.Drawing.Size(127, 39);
+            this.ScoreLabel.Size = new System.Drawing.Size(158, 39);
             this.ScoreLabel.TabIndex = 2;
-            this.ScoreLabel.Text = "Score :";
+            this.ScoreLabel.Text = "Score : 0";
             // 
             // StartBtn
             // 
@@ -84,9 +85,9 @@ namespace Game
             this.TimeLabel.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeLabel.Location = new System.Drawing.Point(510, 28);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(166, 63);
+            this.TimeLabel.Size = new System.Drawing.Size(178, 63);
             this.TimeLabel.TabIndex = 0;
-            this.TimeLabel.Text = "Time :";
+            this.TimeLabel.Text = "Time : 00";
             // 
             // ClockTimer
             // 
@@ -169,12 +170,23 @@ namespace Game
             this.FadeTimer.Interval = 10;
             this.FadeTimer.Tick += new System.EventHandler(this.FadeTimer_Tick);
             // 
+            // lol
+            // 
+            this.lol.AutoSize = true;
+            this.lol.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lol.Location = new System.Drawing.Point(75, 332);
+            this.lol.Name = "lol";
+            this.lol.Size = new System.Drawing.Size(879, 61);
+            this.lol.TabIndex = 9;
+            this.lol.Text = "Score 300 points to go to next Level ";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(149)))), ((int)(((byte)(235)))));
             this.ClientSize = new System.Drawing.Size(1034, 760);
+            this.Controls.Add(this.lol);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.UpdateLabel);
             this.DoubleBuffered = true;
@@ -209,6 +221,7 @@ namespace Game
         private System.Windows.Forms.Button NextLevelBtn;
         private System.Windows.Forms.Label UpdateLabel;
         private System.Windows.Forms.Timer FadeTimer;
+        private System.Windows.Forms.Label lol;
     }
 }
 
